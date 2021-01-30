@@ -17,7 +17,7 @@ body {
 
 body {
   background-color: #fe0037;
-  padding: 10px;
+  padding: 13px;
   font-family: Poppins;
   display: flex;
   flex-direction: column;
@@ -110,4 +110,20 @@ body {
   font-family: Poppins;
   width: 200px;
   font-size: 1em;
+}
+
+.textcontent .hcentered {
+  align-self: center;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.textcontent a {
+  text-decoration: none;
+  color: #111;
+}
+
+.textcontent a:hover {
+  color: #fe0037;
 }

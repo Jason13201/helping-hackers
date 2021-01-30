@@ -11,9 +11,15 @@ def home():
     ):
         problemDetails = request.form["problem-details"]
         print(problemDetails)
+        # String containing the problem submission
+        # Store in db
+
+        return render_template("submit.html")
+
     return render_template("home.html")
 
 
 @app.route("/list")
 def problemlist():
+    # Retrieve all records from db
     pass
