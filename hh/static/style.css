@@ -83,7 +83,7 @@ body {
   line-height: 1.2;
 }
 
-.textcontent form {
+.textcontent .idea-form {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -91,7 +91,7 @@ body {
   align-items: center;
 }
 
-.textcontent textarea {
+.textcontent .idea-form textarea {
   width: 100%;
   font-family: Poppins;
   padding: 13px;
@@ -104,12 +104,12 @@ body {
   min-height: 200px;
 }
 
-.textcontent textarea:focus {
+.textcontent .idea-form textarea:focus {
   outline: none;
   border: 2px solid #777;
 }
 
-.textcontent button {
+.textcontent .idea-form button {
   font-family: Poppins;
   width: 200px;
   font-size: 1em;
@@ -134,4 +134,34 @@ body {
 .problemList {
   display: flex;
   flex-direction: column;
+}
+
+.solvethis {
+  font-style: oblique;
+  cursor: pointer;
+  color: #555;
+  transition: color 0.3s;
+}
+
+.solvethis:hover {
+  color: #222;
+}
+
+.problemList form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.problemList input,
+.problemList button {
+  font-family: Poppins;
+  font-size: 1em;
+}
+
+.problemList input {
+  border: none;
+}
+
+.problemList input:focus {
+  outline: none;
 }

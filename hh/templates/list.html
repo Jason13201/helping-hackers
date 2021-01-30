@@ -1,8 +1,47 @@
 {% extends "layout.html" %} {% set linked_page = "submit" %} {% block content %}
 <h1>Problems you can solve</h1>
 <ol class="problemList">
-  {% for id, problem in problems %}
-  <li>{{ problem }}</li>
+  {% for id, problem, solves in problems %}
+  <li>
+    {{ problem|e }} <span class="solvethis" data-id="{{ id }}">Solve</span>
+    {% if solves %}
+    <ul>
+      {% for name, link in solves %}
+      <li><a href="{{ link }}">Solved by {{ name|e }}</a></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </li>
   {% endfor %}
 </ol>
+<script>
+  const solveBtns = Array.from(document.querySelectorAll(".solvethis"));
+  const handleSolveClick = (e) => {
+    const forms = Array.from(document.getElementsByTagName("form"));
+    for (const form of forms) {
+      const parent = form.parentNode;
+      parent.removeChild(form);
+      if (parent == e.target.parentNode) return;
+    }
+    e.target.insertAdjacentHTML(
+      "afterend",
+      `<form method="POST">
+        <div class="wrapper block">
+          <input type="text" placeholder="Your name" name="username" required>
+        </div>
+        <div class="wrapper block">
+          <input type="url" placeholder="Link to your project" name="link" required>
+        </div>
+        <input type="hidden" name="id" value="${e.target.getAttribute(
+          "data-id"
+        )}">
+        <button class="block">Submit!</button>
+      </form>`
+    );
+  };
+
+  for (const solveBtn of solveBtns) {
+    solveBtn.addEventListener("click", handleSolveClick);
+  }
+</script>
 {% endblock content %}

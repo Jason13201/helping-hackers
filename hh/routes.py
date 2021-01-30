@@ -1,6 +1,6 @@
+import json
 from flask import render_template, url_for, request, redirect
 from hh import app
-
 
 from cassandra.cluster import Cluster
 from cassandra.auth import PlainTextAuthProvider
@@ -40,12 +40,34 @@ def home():
     return render_template("home.html")
 
 
-@app.route("/list")
+def getSolves(p_id):
+    global problems
+
+    for prob_id, _, solves in problems:
+        if prob_id == p_id:
+            return solves
+
+
+@app.route("/list", methods=["GET", "POST"])
 def problemlist():
+    global problems
+
+    if request.form:
+        p_id, username, link = [
+            request.form.get(name) for name in ["id", "username", "link"]
+        ]
+        p_id = int(p_id)
+        currentSolves = getSolves(p_id)
+        solves = [[username, link]] + (currentSolves if currentSolves else [])
+        session.execute(
+            "UPDATE breakfast.problems SET solves = %s WHERE id = %s",
+            (json.dumps(solves), p_id),
+        )
+
     # Retrieve all records from db
     problems = [
-        (row.id, row.column)
-        for row in session.execute("SELECT id, column FROM breakfast.problems;")
+        (row.id, row.column, json.loads(row.solves) if row.solves else None)
+        for row in session.execute("SELECT id, column, solves FROM breakfast.problems;")
     ]
     print(problems)
     return render_template("list.html", problems=problems)
