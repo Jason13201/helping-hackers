@@ -1,6 +1,5 @@
 * {
   box-sizing: border-box;
-  line-height: 1;
 }
 
 ::selection {
@@ -44,6 +43,7 @@ body {
   display: flex;
   align-items: center;
   font-size: 1.1em;
+  line-height: 1.2;
 }
 
 .navbar div {
@@ -80,6 +80,7 @@ body {
   font-size: 2.5em;
   font-weight: 400;
   margin: 10px 0;
+  line-height: 1.2;
 }
 
 .textcontent form {
