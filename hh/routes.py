@@ -75,5 +75,7 @@ def problemlist():
 
 @app.route("/deleteall")
 def deleteall():
+    global problemId
+    problemId = 1
     session.execute("TRUNCATE breakfast.problems")
     return redirect(url_for("home"))
