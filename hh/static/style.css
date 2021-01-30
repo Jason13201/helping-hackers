@@ -1,0 +1,110 @@
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  color: red;
+  background: yellow;
+}
+
+html,
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: #111;
+  font-size: 1.2em;
+}
+
+body {
+  background-color: #fe0037;
+  padding: 10px;
+  font-family: Poppins;
+  display: flex;
+  flex-direction: column;
+}
+
+.maincontainer {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  flex-grow: 1;
+  /* padding: 10px; */
+  border: 2.5px solid #111;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  height: 80px;
+  background-color: #111;
+  color: white;
+  font-family: Bungee;
+  display: flex;
+  align-items: center;
+  font-size: 1.1em;
+}
+
+.navbar div {
+  padding: 0 13px;
+}
+
+.navbar .spacer {
+  flex-grow: 1;
+}
+
+.navbar .solve {
+  text-align: right;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: white;
+}
+
+.navbar a:hover {
+  color: #fe0037;
+}
+
+.textcontent {
+  padding: 13px 13px 0 13px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  flex-grow: 1;
+}
+
+.textcontent h1 {
+  font-family: Bungee;
+  font-size: 2.5em;
+  font-weight: 400;
+  margin: 10px 0;
+}
+
+.textcontent textarea {
+  width: 100%;
+  font-family: Poppins;
+  padding: 13px;
+  font-size: 1em;
+  resize: none;
+  border: 2px solid #555;
+  border-radius: 6px;
+  flex-grow: 1;
+}
+
+.textcontent textarea:focus {
+  outline: none;
+  border: 2px solid #777;
+}
+
+.textcontent .submit-button {
+  display: flex;
+  justify-content: center;
+  padding: 13px 0;
+}
+
+.textcontent button {
+  font-family: Poppins;
+  width: 200px;
+  font-size: 1em;
+}

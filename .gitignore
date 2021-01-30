@@ -1,5 +1,6 @@
-
-# DB config files
+# Datastax Astra / Apache Cassandra config files
 config.py
 secure-connect-breakfastproblems.zip
 
+# Pycache
+__pycache__
