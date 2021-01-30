@@ -99,6 +99,7 @@ body {
   border-radius: 6px;
   height: 100%;
   flex-grow: 1;
+  min-height: 200px;
 }
 
 .textcontent textarea:focus {
@@ -126,4 +127,9 @@ body {
 
 .textcontent a:hover {
   color: #fe0037;
+}
+
+.problemList {
+  display: flex;
+  flex-direction: column;
 }

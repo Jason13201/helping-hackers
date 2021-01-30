@@ -1,4 +1,4 @@
-from flask import render_template, url_for, request
+from flask import render_template, url_for, request, redirect
 from hh import app
 
 
@@ -11,11 +11,14 @@ auth_provider = PlainTextAuthProvider(username, password)
 cluster = Cluster(cloud=cloud_config, auth_provider=auth_provider)
 session = cluster.connect()
 
-id = 1
+problems = session.execute("SELECT id FROM breakfast.problems;")
+
+problemId = 1 + max([row.id for row in problems]) if problems else 1
 
 
 @app.route("/", methods=["GET", "POST"])
 def home():
+    global problemId
     if (
         request.form
         and "problem-details" in request.form
@@ -23,17 +26,14 @@ def home():
     ):
         problemDetails = request.form["problem-details"]
         print(problemDetails)
-        # String containing the problem submission
-        # Store in db
-        global id
         session.execute(
             """
         INSERT INTO breakfast.problems (id, column)
         VALUES (%s, %s)
         """,
-            (id, problemDetails),
+            (problemId, problemDetails),
         )
-        id += 1
+        problemId += 1
 
         return render_template("submit.html")
 
@@ -43,8 +43,15 @@ def home():
 @app.route("/list")
 def problemlist():
     # Retrieve all records from db
-    listOfProblems = []
-    rows = session.execute("SELECT id, column FROM breakfast.problems;")
-    for row in rows:
-        listOfProblems.append(row.column)
-    pass
+    problems = [
+        (row.id, row.column)
+        for row in session.execute("SELECT id, column FROM breakfast.problems;")
+    ]
+    print(problems)
+    return render_template("list.html", problems=problems)
+
+
+@app.route("/deleteall")
+def deleteall():
+    session.execute("TRUNCATE breakfast.problems")
+    return redirect(url_for("home"))

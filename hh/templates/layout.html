@@ -23,7 +23,15 @@
       <div class="navbar">
         <div class="title">Helping Hackers</div>
         <div class="spacer"></div>
-        <div class="solve"><a href="#">Solve a problem</a></div>
+        <div class="solve">
+          {% if linked_page == "submit" %}
+          <a href="{{ url_for('home') }}">Submit a problem</a>
+          {% elif linked_page == "list" %}
+          <a href="{{ url_for('problemlist') }}">List problems</a>
+          {% else %}
+          <a href="{{ url_for('problemlist') }}">Solve a problem</a>
+          {% endif %}
+        </div>
       </div>
       <div class="textcontent">{% block content %}{% endblock %}</div>
     </div>
